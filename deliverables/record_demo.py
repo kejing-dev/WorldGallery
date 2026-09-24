@@ -11,22 +11,25 @@ S = ["adb", "-s", "emulator-5554"]
 def run(args, t=120):
     return subprocess.run(args, capture_output=True, text=True, timeout=t).stdout.strip()
 
-focus = run(S + ["shell", "dumpsys", "window"], 90)
-front = next((l.strip() for l in focus.splitlines() if "mCurrentFocus" in l), "")
-if "worldgallery" not in front and "com.pxr" not in front and "launcher" not in front.lower():
-    sys.exit(f"emulator busy: {front} — not recording")
+focus = run(S + ["shell", "dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'"], 90)
+front = " ".join(focus.split())
+print("focus:", front or "(none reported)")
+if front and not any(k in front for k in ("worldgallery", "com.pxr.", "launcher", "picohome")):
+    sys.exit("emulator busy — another app is in front; not recording")
 
 run(S + ["shell", "monkey", "-p", "com.worldgallery.spatial", "-c", "android.intent.category.LAUNCHER", "1"], 90)
 time.sleep(14)
-drive.cmd("lang", "en"); drive.cmd("hintSeen"); drive.cmd("tab", "paintings"); time.sleep(4)
+drive.cmd("lang", "zh"); drive.cmd("hintSeen"); drive.cmd("tab", "paintings"); drive.cmd("closeFrame"); time.sleep(6)
 
-rec = subprocess.Popen(S + ["shell", "screenrecord", "--time-limit", "42", "--bit-rate", "8000000", "/sdcard/wg-demo.mp4"])
-steps = [("start", "essentials", 6), ("next", "", 5), ("zoomIn", "", 2), ("zoomIn", "", 4), ("fit", "", 3),
-         ("info", "", 5), ("closeInfo", "", 2), ("frame", "", 6), ("immersive", "", 8), ("next", "", 4), ("leaveImmersive", "", 5)]
+rec = subprocess.Popen(S + ["shell", "screenrecord", "--time-limit", "56", "--size", "1080x1080", "--bit-rate", "8000000", "/sdcard/wg-demo.mp4"])
+time.sleep(1.5)
+# the emulator repaints a window only every few seconds when nobody operates it, so few steps with long holds
+steps = [("start", "essentials", 9), ("next", "", 8), ("info", "", 9), ("closeInfo", "", 1), ("frame", "", 9),
+         ("immersive", "", 11), ("leaveImmersive", "", 8)]
 for cmd, arg, wait in steps:
     drive.cmd(cmd, arg) if arg else drive.cmd(cmd)
     time.sleep(wait)
-rec.wait(timeout=60)
+rec.wait(timeout=90)
 run(S + ["pull", "/sdcard/wg-demo.mp4", "raw-demo.mp4"], 300)
 subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", "raw-demo.mp4",
                 "-vf", "scale=1080:1080:force_original_aspect_ratio=decrease,pad=1080:1080:(ow-iw)/2:(oh-ih)/2",
