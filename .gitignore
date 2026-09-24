@@ -1,0 +1,51 @@
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log/OS Files
+*.log
+.DS_Store
+
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
+
+# IntelliJ
+*.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Android Profiling
+*.hprof
+
+# Kotlin / Gradle caches
+.kotlin/
+
+# PICO CLI agent tooling (machine-specific, re-created by `pico-cli setup`)
+.claude/
+.mcp.json
+.pico-env.json
+PICO-SPATIAL-AGENTIC-TOOLS.AGENTS.md
+CLAUDE.md
+
+# Debug APK is copied here for hand-off only
+deliverables/*.apk
+
+# Evidence screenshots stay local (100+ full-resolution PNGs); curated copies live in docs/screenshots/
+deliverables/screenshots/
+deliverables/__pycache__/

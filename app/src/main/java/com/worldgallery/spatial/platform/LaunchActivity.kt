@@ -1,0 +1,5 @@
+package com.worldgallery.spatial.platform
+
+import com.pico.spatial.ui.platform.stub.SpatialLaunchActivity
+
+class LaunchActivity : SpatialLaunchActivity()

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Load 3D downloads museum scans on demand (WG-03); bundled images need no network. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".platform.SpatialApplication"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_spatial_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_spatial_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WorldGalleryTheme"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".platform.LaunchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WorldGalleryTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- World Gallery main window: Form.Planar "Gallery / Main Window" (Figma 1134 × 748 dp).
+                 The art frame is a second Planar WindowContainer and the immersive viewer a Stage,
+                 both declared in the mainApp DSL (Main.kt). -->
+            <meta-data android:name="pico.spatial.windowcontainer.id" android:value="WorldGalleryMain" />
+            <!-- 1 = Form.Planar -->
+            <meta-data android:name="pico.spatial.windowcontainer.style" android:value="1" />
+            <meta-data android:name="pico.spatial.windowcontainer.defaultsize" android:value="1134x748" />
+            <meta-data android:name="pico.spatial.windowcontainer.defaultsize.unit" android:value="dp" />
+            <!-- 1 = ContentMinSize: the window never gets smaller than the browsing layout -->
+            <meta-data android:name="pico.spatial.windowcontainer.resizetype" android:value="1" />
+            <meta-data android:name="pico.spatial.windowcontainer.resizerestriction" android:value="0" />
+            <!-- 1 = WorldScale.Dynamic: comfortable size at any distance (seated viewing, PRD 4) -->
+            <meta-data android:name="pico.spatial.windowcontainer.worldscaletype" android:value="1" />
+            <meta-data android:name="pico.spatial.windowcontainer.captionbar" android:value="0" />
+            <!-- 0 = no system glass: the design uses an opaque "panel" surface (design-style: opaque-root) -->
+            <meta-data android:name="pico.spatial.windowcontainer.materialbackground" android:value="0" />
+        </activity>
+
+        <meta-data android:name="icon.3d.list" android:resource="@array/icon_3d_list" />
+        <meta-data android:name="icon.sdf.list" android:resource="@array/icon_sdf_list" />
+    </application>
+
+</manifest>
