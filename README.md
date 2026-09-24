@@ -4,6 +4,8 @@
 
 坐在原地，一件接一件地近看世界名作。World Gallery 是一个 PICO OS 6 Spatial SDK 应用（Kotlin + Jetpack Compose + Spatial ECS）：在 Shared Space 的平面窗口里浏览、逐件观赏名画和雕塑，把喜欢的一幅挂成独立的艺术画框窗口，或进入 Full Space 在暗色场景里只留当前作品。离线可用，进度、收藏与设置保存在本机，中英双语。按 [PRD v0.4](https://bytedance.us.larkoffice.com/docx/BY6odKmi9o06zGxHAR9uAUy4sUc) 与 [Figma 设计稿](https://www.figma.com/design/KyputdjwUDJB3ZUrxLtPRI/World-Gallery) 实现。
 
+演示视频（PICO 模拟器，49 s，模拟器空闲时显示只有约 1 Hz 刷新，所以像幻灯片）：[`deliverables/WorldGallery-demo.mp4`](deliverables/WorldGallery-demo.mp4)
+
 <table>
 <tr>
 <td><img src="docs/screenshots/home.jpg" alt="首页：继续观赏与精选合集"><br><sub>首页：继续观赏、精选合集、名画 / 雕塑 / 收藏 Tab</sub></td>

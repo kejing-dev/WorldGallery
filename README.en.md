@@ -4,6 +4,8 @@ English · [中文](README.md)
 
 Sit where you are and look closely at the world's masterpieces, one work at a time. World Gallery is a PICO OS 6 Spatial SDK app (Kotlin + Jetpack Compose + Spatial ECS): browse and view paintings and sculptures in a Shared Space planar window, hang a favourite as its own art-frame window, or step into Full Space where only the current work remains in a dark scene. Works offline; progress, favourites and settings are stored on the device; Chinese and English UI. Built from the [PRD v0.4](https://bytedance.us.larkoffice.com/docx/BY6odKmi9o06zGxHAR9uAUy4sUc) and the [Figma file](https://www.figma.com/design/KyputdjwUDJB3ZUrxLtPRI/World-Gallery).
 
+Demo (PICO Emulator, 49 s; the emulator repaints at ~1 Hz when idle, so it plays like a slideshow): [`deliverables/WorldGallery-demo.mp4`](deliverables/WorldGallery-demo.mp4)
+
 <table>
 <tr>
 <td><img src="docs/screenshots/home.jpg" alt="Home"><br><sub>Home: continue viewing, featured collections, Paintings / Sculpture / Favorites tabs</sub></td>
